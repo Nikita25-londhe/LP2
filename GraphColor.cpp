@@ -1,94 +1,110 @@
 #include<iostream>
+#include<set>
+#include<climits>
 using namespace std;
-class Graph
+
+class Graph 
 {
     int n;
     int** graph;
-    public:
-    Graph(int a)
-    {
-        n=a;
-        graph=new int*[n];
-        for(int i=0;i<n;i++)
-        {
-            graph[i]=new int[n];
-            for(int j=0;j<n;j++)
-            {
-                graph[i][j]=0;
+    int minColorsUsed;
+
+public:
+    Graph(int a) {
+        n = a;
+        graph = new int*[n];
+        for (int i = 0; i < n; i++) {
+            graph[i] = new int[n];
+            for (int j = 0; j < n; j++) {
+                graph[i][j] = 0;
+            }
+        }
+        minColorsUsed = INT_MAX;
+    }
+
+    void readGraph() {
+        cout << "\nEnter graph matrix:\n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cin >> graph[i][j];
             }
         }
     }
-    void readGraph()
-    {
-        cout<<"\nEnter graph matrix:";
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<n;j++)
-            {
-                cin>>graph[i][j];
+
+    void showGraph() {
+        cout << "\nGraph Matrix:\n";
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cout << graph[i][j] << " ";
             }
+            cout << endl;
         }
     }
-    void showGraph()
-    {
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<n;j++)
-            {
-               cout<<graph[i][j]<<" ";
-            }
-        }
-        cout<<endl;
-    }
-    bool canIColor(int v,int clr,int* color)
-    {
-        for(int i=0;i<n;i++)
-        {
-            if(graph[v][i]!=0 && color[i]==clr)
-            {
+
+    bool canIColor(int v, int clr, int* color) {
+        for (int i = 0; i < n; i++) {
+            if (graph[v][i] != 0 && color[i] == clr) {
                 return false;
             }
         }
         return true;
     }
-   void colorvertex(int v,int* color,int m)
-   {
-    if(v==n)
-    {
-        for(int i=0;i<n;i++)
-        {
-            cout<<color[i]<<" ";
+
+    int countUniqueColors(int* color) {
+        set<int> usedColors;
+        for (int i = 0; i < n; i++) {
+            if (color[i] != -1) usedColors.insert(color[i]);
         }
-        cout<<endl;
-        return;
+        return usedColors.size();
     }
-    for(int i=0;i<m;i++)
-    {
-        if(canIColor(v,i,color))
-        {
-            color[v]=i;
-            colorvertex(v+1,color,m);
+
+    void colorVertex(int v, int* color, int m) {
+        if (v == n) {
+            int used = countUniqueColors(color);
+            if (used < minColorsUsed) {
+                minColorsUsed = used;
+                cout << "\nFound better solution with " << used << " colors: ";
+                for (int i = 0; i < n; i++) {
+                    cout << color[i] << " ";
+                }
+                cout << endl;
+            }
+            return;
+        }
+
+        for (int i = 0; i < m; i++) {
+            if (canIColor(v, i, color)) {
+                color[v] = i;
+
+                // Prune if this path already uses more colors than current best
+                int used = countUniqueColors(color);
+                if (used < minColorsUsed)
+                    colorVertex(v + 1, color, m);
+
+                color[v] = -1;  // Backtrack
+            }
         }
     }
-    color[v]=-1;
-   }
 };
-int main()
-{
+
+int main() {
     int n;
-    cout<<"\nEnter no of vertices:";
-    cin>>n;
+    cout << "\nEnter number of vertices: ";
+    cin >> n;
+
     Graph g1(n);
     g1.readGraph();
     g1.showGraph();
-    int* color=new int[n];
-    for(int i=0;i<n;i++)
-    {
-        color[i]=-1;
+
+    int* color = new int[n];
+    for (int i = 0; i < n; i++) {
+        color[i] = -1;
     }
+
     int m;
-    cout<<"\nEnter no of avialable colors:";
-    cin>>m;
-    g1.colorvertex(0,color,m);
+    cout << "\nEnter number of available colors: ";
+    cin >> m;
+
+    g1.colorVertex(0, color, m);
     return 0;
 }
