@@ -7,8 +7,6 @@ class Graph
 {
     int n;
     int** graph;
-    int minColorsUsed;
-
 public:
     Graph(int a) {
         n = a;
@@ -19,7 +17,6 @@ public:
                 graph[i][j] = 0;
             }
         }
-        minColorsUsed = INT_MAX;
     }
 
     void readGraph() {
@@ -50,20 +47,9 @@ public:
         return true;
     }
 
-    int countUniqueColors(int* color) {
-        set<int> usedColors;
-        for (int i = 0; i < n; i++) {
-            if (color[i] != -1) usedColors.insert(color[i]);
-        }
-        return usedColors.size();
-    }
-
     void colorVertex(int v, int* color, int m) {
-        if (v == n) {
-            int used = countUniqueColors(color);
-            if (used < minColorsUsed) {
-                minColorsUsed = used;
-                cout << "\nFound better solution with " << used << " colors: ";
+        if (v == n) 
+        {
                 for (int i = 0; i < n; i++) {
                     cout << color[i] << " ";
                 }
@@ -75,14 +61,7 @@ public:
         for (int i = 0; i < m; i++) {
             if (canIColor(v, i, color)) {
                 color[v] = i;
-
-                // Prune if this path already uses more colors than current best
-                int used = countUniqueColors(color);
-                if (used < minColorsUsed)
-                    colorVertex(v + 1, color, m);
-
-                color[v] = -1;  // Backtrack
-            }
+                colorVertex(v + 1, color, m);
         }
     }
 };
