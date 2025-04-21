@@ -58,12 +58,15 @@ public:
             return;
         }
 
-        for (int i = 0; i < m; i++) {
-            if (canIColor(v, i, color)) {
-                color[v] = i;
-                colorVertex(v + 1, color, m);
+        for (int i = 0; i < m; i++) 
+        {
+                if (canIColor(v, i, color)) 
+                {
+                    color[v] = i;
+                    colorVertex(v + 1, color, m);
+                    color[v]=-1;
+                }
         }
-    }
 };
 
 int main() {
