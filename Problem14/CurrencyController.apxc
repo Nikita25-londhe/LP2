@@ -1,0 +1,18 @@
+public class CurrencyConverter {
+    public Double amount { get; set; }
+    public Double res{ get; set; }
+    public String direction { get; set; }
+
+    public void convert() 
+    {
+        if (direction == 'USD to INR') 
+        {
+            res= amount * 83.2; 
+        }
+        else if (direction == 'INR to USD') 
+        {
+            res =amount / 83.2;
+        }
+
+    }
+}
