@@ -1,0 +1,26 @@
+public class Myctrl 
+{
+    public Double num1{get;set;}
+    public Double num2{get;set;}
+    public String operation{get;set;}
+    public Double res{get;set;}
+    public void calculate()
+    {
+        if(operation=='add')
+        {
+            res=num1+num2;
+        }
+        else if(operation=='sub')
+        {
+            res=num1-num2;
+        }
+        else if(operation=='multi')
+        {
+            res=num1*num2;
+        }
+        else if(operation=='div')
+        {
+            res=num1/num2;
+        }
+    }
+}
