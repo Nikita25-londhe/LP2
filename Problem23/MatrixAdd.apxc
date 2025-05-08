@@ -1,0 +1,53 @@
+public class MatrixAdd 
+{
+	public static List<List<Integer>>add(List<List<Integer>>A,List<List<Integer>>B)
+    {
+        List<List<Integer>>res=new List<List<Integer>>();
+        Integer rowsA=A.size();
+        Integer colsA=A[0].size();
+        Integer rowsB=B.size();
+        Integer colsB=B[0].size();
+        if(rowsA!=rowsB || colsA!=colsB)
+        {
+            System.debug('Unable to add 2 Matrices!');
+            return null;
+        }
+        for(Integer i=0;i<rowsA;i++)
+        {
+            List<Integer>temp=new List<Integer>();
+            for(Integer j=0;j<colsA;j++)
+            {
+                temp.add(0);
+            }
+            res.add(temp);
+        }
+         for(Integer i=0;i<rowsA;i++)
+        {
+            for(Integer j=0;j<colsA;j++)
+            {
+                res[i][j]=A[i][j]+B[i][j];
+            }
+        }
+        return res;
+        
+    }
+    public static void test()
+    {
+        List<List<Integer>>A=new List<List<Integer>>{
+            new List<Integer>{1,3,4},
+                new List<Integer>{1,2,3}
+        };
+        List<List<Integer>>B=new List<List<Integer>>
+        {
+            new List<Integer>{1,0,6},
+                new List<Integer>{1,2,7}
+        };
+        List<List<Integer>>res=new List<List<Integer>>();
+        res=MatrixAdd.add(A, B);
+        for(List<Integer>row:res)
+        {
+            System.debug(row);
+        }
+    }
+ 
+}
