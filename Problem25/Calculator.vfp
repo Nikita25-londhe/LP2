@@ -1,0 +1,20 @@
+<apex:page controller="Myctrl">
+    <apex:pageBlock>
+    <apex:pageBlockSection>
+    <apex:form >
+        <apex:inputText value="{!num1}" label="Number1" title="Enter a no:"/>
+    	<apex:inputText value="{!num2}" label="Number2" title="Enter a no:"/>
+        <apex:selectList value="{!operation}">
+            <apex:selectOption itemLabel="Add" itemValue="add"></apex:selectOption>
+            <apex:selectOption itemLabel="Sub" itemValue="sub"></apex:selectOption>
+            <apex:selectOption itemLabel="Multi" itemValue="multi"></apex:selectOption>
+            <apex:selectOption itemLabel="Div" itemValue="div"></apex:selectOption>
+        </apex:selectList>
+        <apex:commandButton value="calculate" action="{!calculate}" reRender="output"/>
+         <apex:outputPanel id="output"><h1>
+             {!res}
+             </h1></apex:outputPanel>
+    </apex:form>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+</apex:page>
