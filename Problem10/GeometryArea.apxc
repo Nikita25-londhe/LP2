@@ -1,0 +1,26 @@
+public class GeometryArea 
+{
+	public static double circleArea(double r)
+    {
+        return Math.pi*r*r;
+    }
+    public static double RectangleArea(double l,double b)
+    {
+        return l*b;
+    }
+     public static double SquareArea(double s)
+    {
+        return s*s;
+    }
+     public static double TriangleArea(double b,double h)
+    {
+        return 0.5*b*h;
+    }
+    public static void calculateAreas()
+    {
+        System.debug('Area of circle:'+GeometryArea.circleArea(1));
+        System.debug('Area of Rectangle:'+GeometryArea.RectangleArea(4,5));
+        System.debug('Area of Square:'+GeometryArea.SquareArea(6));
+        System.debug('Area of Triangle:'+GeometryArea.TriangleArea(1,8));
+    }
+}
