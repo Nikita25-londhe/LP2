@@ -1,0 +1,26 @@
+public class Addition
+{
+    public static List<Integer>addArrays(List<Integer>arr1,List<Integer>arr2)
+    {
+       	Integer i=0;
+        Integer j=0;
+        List<Integer>result=new List<Integer>();
+        while(i<arr1.size() && j<arr2.size())
+        {
+            result.add(arr1[i]+arr2[j]);
+            i++;
+            j++;
+        }
+        while(i<arr1.size())
+        {
+            result.add(arr1[i]);
+            i++;
+        }
+        while(j<arr2.size())
+        {
+            result.add(arr2[j]);
+            j++;
+        }
+        return result;
+    }
+}
