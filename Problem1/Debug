@@ -1,0 +1,10 @@
+//Go to Debug → Open Execute Anonymous Window
+List<Integer> result = Addition.addArrays(
+    new List<Integer>{1,2,3,4,5}, 
+    new List<Integer>{5,6,7,8}
+);
+System.debug('Result: ' + result);
+//Click Execute
+//Bottom Panel → Logs tab
+//Tick Debug Only
+09:37:03:002 USER_DEBUG [5]|DEBUG|Result: (6, 8, 10, 12, 5)
