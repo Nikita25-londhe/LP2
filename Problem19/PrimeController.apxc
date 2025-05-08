@@ -1,0 +1,21 @@
+public class PrimeController {
+    public Integer num{get;set;}
+    public Boolean res{get;set;}
+    public void isPrime()
+    {
+        if(num==2)
+        {
+            res=true;
+            return;
+        }
+ 		for(Integer i=2;i<num;i++)
+        {
+            if(Math.mod(num,i) == 0)
+            {
+                res=false;
+                return;
+            }
+        }
+        res=true;
+    }
+}
