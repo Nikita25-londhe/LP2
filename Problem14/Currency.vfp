@@ -1,0 +1,24 @@
+<apex:page controller="CurrencyConverter">
+    <apex:pageBlock>
+        <apex:pageBlockSection>
+            <apex:form>
+              
+                <apex:selectList value="{!direction}">
+                    <apex:selectOption itemLabel="USD to INR" itemValue="USD to INR"></apex:selectOption>
+                    <apex:selectOption itemLabel="INR to USD" itemValue="INR to USD"></apex:selectOption>
+                </apex:selectList>
+                <br/>
+                  <apex:outputText>Enter Amount:</apex:outputText><br/>
+                <apex:inputText value="{!amount}"/>
+                <br/>
+   				<apex:commandButton action="{!convert}" value="Convert" reRender="output"/>
+            </apex:form>
+            <br/>
+            <apex:outputPanel id="output">
+                <h1>
+                     {!res}
+                </h1>
+            </apex:outputPanel>
+    	</apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
