@@ -1,0 +1,55 @@
+public class MatrixMultiplication 
+{
+    public static List<List<Integer>>multiply(List<List<Integer>>A,List<List<Integer>>B)
+    {
+        Integer rowsA=A.size();
+        Integer colsA=A[0].size();
+        Integer rowsB=B.size();
+        Integer colsB=B[0].size();
+        if(colsA!=rowsB)
+        {
+            System.debug('Unable to multiply 2 matrices');
+            return null;    
+        }
+        List<List<Integer>>res=new List<List<Integer>>();
+        for(Integer i=0;i<rowsA;i++)
+        {
+            List<Integer>temp=new List<Integer>();
+            for(Integer j=0;j<colsB;j++)
+            {
+                temp.add(0);
+            }
+            res.add(temp);
+        }
+        for(Integer i=0;i<rowsA;i++)
+        {
+            for(Integer j=0;j<colsB;j++)
+            {
+                for(Integer k=0;k<colsA;k++)
+                {
+                    res[i][j]+=(A[i][k]*B[k][j]);
+                }
+            }
+        }
+        return res;
+    }
+    public static void test()
+    {
+        List<List<Integer>>A=new List<List<Integer>>{
+            new List<Integer>{1,3,4},
+                new List<Integer>{1,2,3}
+        };
+         List<List<Integer>>B=new List<List<Integer>>{
+            new List<Integer>{1,0},
+                new List<Integer>{1,2},
+                    new List<Integer>{2,3}
+        };
+        List<List<Integer>>res=new List<List<Integer>>();
+        res=MatrixMultiplication.multiply(A, B);
+        for(List<Integer>row:res)
+        {
+            System.debug(row);
+        }
+        
+    }
+}
