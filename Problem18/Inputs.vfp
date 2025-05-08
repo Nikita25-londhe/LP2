@@ -1,0 +1,17 @@
+<apex:page controller="Converter">
+    <apex:pageBlock>
+        <apex:pageBlockSection>
+            <apex:form>
+                <apex:inputText label="Enter a Temperature" value="{!temp}"/>
+                <apex:commandButton value="Convert CelsiusTo Fahrenheit" action="{!celciusToFahrenheit}"/>
+                <apex:commandButton value="Convert Fahrenheit To Celcius" action="{!fahrenheitToCelcius}"/>
+            </apex:form>
+            <apex:outputPanel id="output">
+            <apex:outputText>Temperature Conversion:</apex:outputText>
+              <h1>
+                  {!res}
+                </h1>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
