@@ -1,0 +1,16 @@
+<apex:page controller="PrimeController">
+    <apex:pageBlock>
+        <apex:pageBlockSection>
+            <apex:form>
+                <apex:inputText value="{!num}"/>
+    		<apex:commandButton value="Check" action="{!isPrime}" reRender="output"/>
+            </apex:form>
+            <apex:outputPanel id="output">
+             <apex:outputText>The number is prime or not? :</apex:outputText>
+              <apex:outputText rendered="{!res}">Yes</apex:outputText>
+              <apex:outputText rendered="{!NOT(res)}">No</apex:outputText>
+       
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>
