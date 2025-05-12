@@ -1,22 +1,29 @@
-import nltk
-from rules import rules;
-from nltk.tokenize import word_tokenize;
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords
-import random
-def process(str):
-    str=str.lower()
-    tokens=word_tokenize(str)
-    print("Tokens after word tokenize: ",tokens)
-    stop_words=set(stopwords.words('english'))
-    tokens=[word for word in tokens if word not in stop_words]
-    print("Tokens after removal of stopwords",tokens)
-    lemmatizer=WordNetLemmatizer()
-    tokens=[lemmatizer.lemmatize(word) for word in tokens]
-    print("Tokens after lemmatization",tokens)
-    for keys,values in rules.items():
-        for key in keys:
-            if key in tokens:
-                return random.choice(values)
-    return random.choice(["can you rephrase?","Sorry,unable to give answer"])
-    
+import tkinter as tk
+from chatbot import process
+def chat():
+    chat_log.tag_config("user",justify="right",foreground="green")
+    chat_log.tag_config("bot",justify="left",foreground="blue")
+    usr_input=user_input.get()
+    if(usr_input.strip()==""):
+        return
+    chat_log.config(state=tk.NORMAL)
+    chat_log.insert(tk.END,"You >> "+usr_input+" \n ","user")
+    if(usr_input.lower() in ["bye","exit","quit"]):
+        chat_log.insert(tk.END,"Bot >> "+"Thanks for visiting us!Goodbye!","bot")
+        root.after(2000,root.destroy)
+        return
+    response=process(usr_input.lower())
+    chat_log.insert(tk.END,"Bot >> "+response+" \n ","bot")
+    user_input.delete(0,tk.END)
+    chat_log.config(state=tk.DISABLED)
+root=tk.Tk()
+root.title("Restaurant chatbot")
+root.geometry("400x500")
+chat_log=tk.Text(root)
+chat_log.config(state=tk.DISABLED)
+chat_log.pack(pady=5)
+user_input=tk.Entry(root)
+user_input.pack(pady=5)
+send_button=tk.Button(root,text="Send",command=chat)
+send_button.pack(pady=5)
+root.mainloop()
